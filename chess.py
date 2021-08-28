@@ -1,7 +1,10 @@
 from __future__ import print_function
-import re, sys, time
+import re
+import sys
+import time
 from itertools import count
 from collections import namedtuple
+
 piece = { 'P': 100, 'N': 280, 'B': 320, 'R': 479, 'Q': 929, 'K': 60000 }
 pst = {
     'P': (   0,   0,   0,   0,   0,   0,   0,   0,
@@ -53,6 +56,7 @@ pst = {
             -4,   3, -14, -50, -57, -18,  13,   4,
             17,  30,  -3, -14,   6,  -1,  40,  18),
 }
+
 for k, table in pst.items():
     padrow = lambda row: (0,) + tuple(x+piece[k] for x in row) + (0,)
     pst[k] = sum((padrow(table[i*8:i*8+8]) for i in range(8)), ())
@@ -87,6 +91,7 @@ TABLE_SIZE = 1e7
 QS_LIMIT = 219
 EVAL_ROUGHNESS = 13
 DRAW_TEST = True
+
 class Position(namedtuple('Position', 'board score wc bc ep kp')):
     def gen_moves(self):
         for i, p in enumerate(self.board):
@@ -156,6 +161,7 @@ class Position(namedtuple('Position', 'board score wc bc ep kp')):
                 score += pst['P'][119-(j+S)]
         return score
 Entry = namedtuple('Entry', 'lower upper')
+
 class Searcher:
     def __init__(self):
         self.tp_score = {}
