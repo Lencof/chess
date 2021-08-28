@@ -1,1 +1,6 @@
-
+re=2 0.2.24
+time=1.0.0
+itertools=0.1.1
+count=0.0.1
+collections=2 0.3.0
+namedtuple=2 1.0
